@@ -46,8 +46,35 @@ summary(mieszkania)
 Przy niedużych zbiorach danych możemy w łatwy sposób poznać strukturę:
 <img src="img2.png" width="800">
 
-# Przetwarzanie danych
+##Podstawowe zależności
+Sprawdzenie zależności ,,na szybko'', przydatne przy wstępnej analizie gdy nie mamy zbyt wielu danych lub są one już przefiltrowane.
+```{r, message=FALSE, warning = FALSE}
+pairs(mieszkania)
+```
+
+##Braki w danych, poprawność
+Istnieje wiele podejść do tego tematu, np. zastąpienie konkretną wartością, zastąpienie jakąś z agregacji, pominięcie rekordów lub skorzystanie z predykcji.
+```{r, message=FALSE, warning = FALSE}
+mieszkania<-na.omit(mieszkania)
+```
+
+
+##Przeglądanie większych zbiorów danych
+**SQL**? Czemu nie?
 ```{r, message=FALSE, warning = FALSE}
 library(sqldf)
-filter(mieszkania, dzielnica == "Stare Miasto")
+zapytanie1<-"select rok, dzielnica from mieszkania order by rok limit 1" 
+sqldf(zapytanie1)
+```
+##Wczytywanie konkretnych wyników
+```{r, message=FALSE, warning = FALSE}
+zapytanie0<-read.csv.sql("data/mieszkania_wroclaw_ceny.csv",
+sql = "select rok, dzielnica from file order by rok limit 1") 
+print(zapytanie0)
+```
+
+##Pakiet dplyr
+Jeden z popularniejszyh pakietów do przetwarzania danych.
+```{r, message=FALSE, warning = FALSE}
+library(dplyr)
 ```
