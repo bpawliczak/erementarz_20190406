@@ -1,0 +1,53 @@
+---
+title: "Erementarz"
+author: "Michał Burdukiewicz, Bartosz Pawliczak"
+date: "6. kwietnia 2019"
+output:
+  ioslides_presentation:
+    logo: banner.png
+  slidy_presentation: default
+  beamer_presentation: default
+---
+
+## Wczytanie danych
+
+Do **R** można wczytywać dane na wiele sposobów, my skorzystamy z funkcji **read.csv**.
+
+```{r}
+mieszkania <- read.csv("data/mieszkania_wroclaw_ceny.csv", 
+                       encoding = "UTF-8")
+```
+
+Do zmiennej *mieszkania* przypisaliśmy wynik funkcji *read.csv*.
+
+## Obiekty
+
+```{r}
+# wymiary tabeli
+dim(mieszkania)
+
+# pierwsze wiersze z tabeli
+head(mieszkania)
+```
+
+## Obiekty
+
+```{r}
+# podsumowanie tabeli
+summary(mieszkania)
+```
+
+##Interfejs w RStudio 
+
+<img src="img1.png" width="800">
+
+
+##Przeglądanie danych
+Przy niedużych zbiorach danych możemy w łatwy sposób poznać strukturę:
+<img src="img2.png" width="800">
+
+# Przetwarzanie danych
+```{r, message=FALSE, warning = FALSE}
+library(sqldf)
+filter(mieszkania, dzielnica == "Stare Miasto")
+```
